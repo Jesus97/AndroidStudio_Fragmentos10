@@ -1,7 +1,5 @@
 package com.iesvirgendelcarmen.dam.fragment10;
 
-import android.widget.ListView;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,8 +45,5 @@ public class Contenido {
             this.textoDebajo = textoDebajo;
         }
     }
-
-
-
 
 }

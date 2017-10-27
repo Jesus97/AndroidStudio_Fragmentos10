@@ -1,10 +1,14 @@
 package com.iesvirgendelcarmen.dam.fragment10;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 /**
@@ -12,6 +16,31 @@ import android.widget.TextView;
  */
 
 public class Fragmento1 extends ListFragment {
+
+    public Fragmento1(){}
+
+    public interface Callbacks{
+        public void onEntradaSeleccionada(String id);
+    }
+    private Callbacks mCallbacks = CallbacksVacios;
+
+    private static Callbacks CallbacksVacios = new Callbacks(){
+        @Override
+        public void onEntradaSeleccionada(String id){}
+    };
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mCallbacks = (Callbacks)activity;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = CallbacksVacios;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,4 +54,11 @@ public class Fragmento1 extends ListFragment {
             }
         });
     }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        mCallbacks.onEntradaSeleccionada(Contenido.ENT_LISTA.get(position).id);
+    }
 }
+
